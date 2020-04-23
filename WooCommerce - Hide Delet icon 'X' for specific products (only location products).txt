@@ -1,0 +1,16 @@
+//
+add_filter('woocommerce_cart_item_remove_link', 'customized_cart_item_remove_link', 20, 2 );
+function customized_cart_item_remove_link( $button_link, $cart_item_key ){
+    //SET HERE your specific products IDs
+    $targeted_products_ids = array( 436, 437, 438 );
+
+    // Get the current cart item
+    $cart_item = WC()->cart->get_cart()[$cart_item_key];
+
+    // If the targeted product is in cart we remove the button link
+    if( in_array($cart_item['data']->get_id(), $targeted_products_ids) )
+        $button_link = '';
+
+    return $button_link;
+}
+//                        
